@@ -1,0 +1,28 @@
+---
+import { ACQUISITION_MAILTO } from '../consts';
+
+interface Props {
+  label?: string;
+  variant?: 'primary' | 'accent' | 'outline';
+  class?: string;
+}
+
+const {
+  label = 'Request acquisition terms',
+  variant = 'accent',
+  class: extraClass = '',
+} = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  primary: 'btn-primary',
+  accent: 'btn-accent',
+  outline: 'btn-outline',
+};
+---
+
+<a
+  href={ACQUISITION_MAILTO}
+  class={`${variantClasses[variant]} ${extraClass}`}
+>
+  {label}
+</a>

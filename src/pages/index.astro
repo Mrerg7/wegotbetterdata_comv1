@@ -1,0 +1,395 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HERO_IMAGE_CDN } from '../consts';
+---
+
+<BaseLayout>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="relative min-h-[100dvh] flex items-center justify-center overflow-hidden hero-bg data-grid-bg">
+    <div class="absolute inset-0 z-0">
+      <img
+        src={HERO_IMAGE_CDN}
+        alt="WeGotBetterData.com — The Definitive Index for AI Data Excellence"
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-[#050914]/85 via-[#050914]/60 to-[#050914]/95"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(#38bdf8_0.6px,transparent_1px)] bg-[length:6px_6px] opacity-[0.06]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
+      <div class="inline-flex items-center gap-x-2 px-4 py-1 rounded-full border border-sky-400/30 bg-sky-400/5 mb-8">
+        <div class="w-2 h-2 bg-sky-400 rounded-full data-pulse"></div>
+        <span class="uppercase tracking-[3px] text-xs text-sky-300">Now available for strategic acquisition</span>
+      </div>
+
+      <h1 class="text-[56px] md:text-[80px] leading-[0.95] font-display font-bold tracking-tighter mb-6 text-balance">
+        We Got<br><span class="data-gradient">Better Data.</span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto mb-12 text-xl md:text-2xl text-slate-300 font-light leading-relaxed">
+        In a world flooded with AI providers, one question now decides every serious adoption, procurement, and integration decision:
+      </p>
+
+      <p class="max-w-2xl mx-auto text-2xl md:text-3xl font-display font-semibold text-white mb-12">
+        "Who actually has the most accurate, reliable, and trustworthy data?"
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#acquire"
+          class="btn-accent"
+        >
+          INQUIRE ABOUT ACQUISITION
+          <span class="text-2xl">↗</span>
+        </a>
+        <a
+          href="#problem"
+          class="btn-outline"
+        >
+          EXPLORE THE OPPORTUNITY
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-y-1 text-xs tracking-[3px] text-white/30">
+      <span>THE INDEX THE MARKET WILL CONSULT</span>
+      <div class="w-px h-8 bg-gradient-to-b from-transparent via-sky-400/40 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE PROBLEM
+       ============================================================ -->
+  <section id="problem" class="section-bg py-24">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="grid md:grid-cols-12 gap-x-12 items-start">
+        <div class="md:col-span-5">
+          <div class="sticky top-28">
+            <div class="uppercase tracking-[3px] text-xs text-sky-400 mb-3 font-semibold">The Landscape</div>
+            <h2 class="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight mb-6">
+              AI Choice Overload<br>Meets Data<br><span class="text-sky-300">Uncertainty</span>
+            </h2>
+            <div class="w-16 h-px bg-gradient-to-r from-sky-400 to-transparent mb-6"></div>
+            <p class="text-lg text-slate-400 leading-relaxed">
+              Hundreds of AI models and providers compete for attention. Each claims superior intelligence, reasoning, or "real-time knowledge." Yet behind every response lies training data that vary dramatically in accuracy, freshness, bias, and transparency.
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 mt-12 md:mt-0 space-y-6">
+          <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+            <div class="flex items-start gap-x-4">
+              <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">Hallucinations & Confident Fabrications</h3>
+                <p class="text-slate-400 leading-relaxed">AI models routinely generate plausible-sounding but factually incorrect information, eroding trust across every sector from healthcare to legal services.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+            <div class="flex items-start gap-x-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">Opaque & Outdated Training Corpora</h3>
+                <p class="text-slate-400 leading-relaxed">Hidden training data sources and stale information create concealed risks that can surface as compliance violations, biased outputs, or catastrophic failures in production.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+            <div class="flex items-start gap-x-4">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">Benchmark Gaming & Hype-Driven Decisions</h3>
+                <p class="text-slate-400 leading-relaxed">Marketing claims and cherry-picked benchmarks make objective comparison nearly impossible, forcing enterprises into high-stakes procurement decisions without a neutral, authoritative source.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 p-6 bg-sky-400/5 border border-sky-400/20 rounded-2xl">
+            <p class="text-lg text-sky-200 italic font-light">
+              "The market has moved past the 'which model is smartest?' phase. We are now entering the <span class="font-semibold text-white">'whose data can I actually trust?'</span> era. Decision-makers need a single, credible destination for that answer."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       THE OPPORTUNITY
+       ============================================================ -->
+  <section id="opportunity" class="py-24 hero-bg">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="text-center mb-16">
+        <div class="uppercase tracking-[4px] text-xs text-sky-400 mb-4 font-semibold">Strategic Positioning</div>
+        <h2 class="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight mb-6">
+          Own the Semantic<br><span class="data-gradient">High Ground</span>
+        </h2>
+        <p class="max-w-2xl mx-auto text-xl text-slate-400 leading-relaxed">
+          wegotbetterdata.com is not just a memorable domain. It is a <span class="text-white font-semibold">category-owning phrase</span> that directly addresses the core question every AI user and buyer is already asking.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 text-center card-hover">
+          <div class="w-14 h-14 rounded-2xl bg-sky-400/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Instant Credibility</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">The name itself conveys authority and expertise in the AI data quality space before a single page is built.</p>
+        </div>
+
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 text-center card-hover">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Clear Commercial Intent</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">"Better data" = higher performance, lower risk. The value proposition is embedded in the domain itself.</p>
+        </div>
+
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 text-center card-hover">
+          <div class="w-14 h-14 rounded-2xl bg-teal-400/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Strong Brand Voice</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Confident, no-nonsense, superior. A brand voice that commands attention in a noisy marketplace.</p>
+        </div>
+
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 text-center card-hover">
+          <div class="w-14 h-14 rounded-2xl bg-blue-400/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Exceptional Memorability</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Short, punchy, impossible to forget. Built for word-of-mouth virality and organic brand recall.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-slate-300 text-lg max-w-2xl mx-auto">
+          This domain is perfectly positioned to become the <span class="text-sky-300 font-semibold">go-to index</span> for data quality in AI — the trusted third-party authority that cuts through marketing noise and delivers clarity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       PLATFORM — What a Strategic Buyer Can Build
+       ============================================================ -->
+  <section id="platform" class="section-bg py-24">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="text-center mb-16">
+        <div class="uppercase tracking-[4px] text-xs text-sky-400 mb-4 font-semibold">Platform Potential</div>
+        <h2 class="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight mb-6">
+          What a Strategic<br><span class="data-gradient">Buyer Can Build</span>
+        </h2>
+        <p class="max-w-2xl mx-auto text-xl text-slate-400">
+          wegotbetterdata.com gives its owner a powerful foundation to create a high-value platform with multiple monetization paths:
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: AI Data Quality Index -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-sky-400/10 flex items-center justify-center mb-5">
+            <span class="text-sky-400 text-2xl font-display font-bold">01</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">AI Data Quality Index & Leaderboards</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Objective rankings on accuracy, factual grounding, data freshness, bias mitigation, and source transparency across major models and providers.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20">Index</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">Leaderboard</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-teal-400/10 text-teal-300 border border-teal-400/20">Rankings</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Enterprise Procurement -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-cyan-400/10 flex items-center justify-center mb-5">
+            <span class="text-cyan-400 text-2xl font-display font-bold">02</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Enterprise Procurement & Due Diligence</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            "Which AI has better data for my use case?" — decision frameworks, risk scoring, and vendor comparison reports for high-stakes procurement.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">Enterprise</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-teal-400/10 text-teal-300 border border-teal-400/20">B2B SaaS</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Consumer Decision Engine -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-teal-400/10 flex items-center justify-center mb-5">
+            <span class="text-teal-400 text-2xl font-display font-bold">03</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Consumer & Developer Decision Engine</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Simple, trustworthy guidance for choosing AI tools, copilots, or agents based on real data performance rather than marketing hype.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-teal-400/10 text-teal-300 border border-teal-400/20">Consumer</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20">DevTools</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Data Trust Score API -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-purple-400/10 flex items-center justify-center mb-5">
+            <span class="text-purple-400 text-2xl font-display font-bold">04</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Data Trust Score API & Widgets</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            Allow other sites, tools, and platforms to display verified "data quality" signals via embeddable widgets and API integrations.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-purple-400/10 text-purple-300 border border-purple-400/20">API</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20">Widget</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">Integration</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Premium Research -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center mb-5">
+            <span class="text-amber-400 text-2xl font-display font-bold">05</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Premium Research, Reports & Newsletters</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            "The State of AI Data Quality" reports, deep-dive analyses, and executive briefings — high-margin subscription revenue stream.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-amber-400/10 text-amber-300 border border-amber-400/20">Reports</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20">Subscription</span>
+          </div>
+        </div>
+
+        <!-- Card 6: Certification -->
+        <div class="bg-[#050914] border border-white/10 rounded-2xl p-8 card-hover">
+          <div class="w-12 h-12 rounded-xl bg-emerald-400/10 flex items-center justify-center mb-5">
+            <span class="text-emerald-400 text-2xl font-display font-bold">06</span>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Certification & Badging Program</h3>
+          <p class="text-slate-400 leading-relaxed text-sm">
+            "Better Data Certified" seals for providers meeting rigorous, transparent standards — market-defining trust infrastructure.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-300 border border-emerald-400/20">Certification</span>
+            <span class="text-[10px] px-2.5 py-1 rounded-full bg-sky-400/10 text-sky-300 border border-sky-400/20">Trust</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 p-6 bg-sky-400/5 border border-sky-400/20 rounded-2xl text-center max-w-3xl mx-auto">
+        <p class="text-slate-300 leading-relaxed">
+          The platform can generate revenue through <span class="text-white font-semibold">premium subscriptions, enterprise licensing, lead generation, affiliate partnerships, sponsored benchmarks</span> (with strict editorial independence), and eventual high-value data partnerships.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       VALUE — Why Premium Acquisition Price
+       ============================================================ -->
+  <section id="value" class="hero-bg py-24">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="text-center mb-16">
+        <div class="uppercase tracking-[4px] text-xs text-sky-400 mb-4 font-semibold">Domain Valuation</div>
+        <h2 class="text-5xl md:text-6xl font-display font-bold leading-none tracking-tight mb-6">
+          Why This Domain Supports a<br><span class="data-gradient">Premium Acquisition</span>
+        </h2>
+        <p class="max-w-2xl mx-auto text-xl text-slate-400">
+          The AI market has already demonstrated extraordinary willingness to pay for category-defining digital assets. AI.com sold for $70 million. Multiple .ai domains have cleared six and seven figures.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Tailwind 1 -->
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#050914] p-8 card-hover">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-sky-400/5 rounded-bl-[100px] -mr-8 -mt-8"></div>
+          <div class="relative">
+            <div class="w-14 h-14 rounded-2xl bg-sky-400/10 flex items-center justify-center mb-6">
+              <span class="text-sky-400 text-2xl font-display font-bold">¹</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Exact Commercial Relevance</h3>
+            <p class="text-slate-400 leading-relaxed">
+              It contains the precise language buyers use when evaluating AI solutions. "Who has better data?" is the question — this domain <span class="text-white font-medium">is</span> the answer.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tailwind 2 -->
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#050914] p-8 card-hover">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-400/5 rounded-bl-[100px] -mr-8 -mt-8"></div>
+          <div class="relative">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-400/10 flex items-center justify-center mb-6">
+              <span class="text-cyan-400 text-2xl font-display font-bold">²</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Perfect Market Timing</h3>
+            <p class="text-slate-400 leading-relaxed">
+              The industry is shifting from capability hype to <span class="text-white font-medium">trust, accuracy, and data accountability</span>. This domain owns that conversation before most competitors have even named it.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tailwind 3 -->
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#050914] p-8 card-hover">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-teal-400/5 rounded-bl-[100px] -mr-8 -mt-8"></div>
+          <div class="relative">
+            <div class="w-14 h-14 rounded-2xl bg-teal-400/10 flex items-center justify-center mb-6">
+              <span class="text-teal-400 text-2xl font-display font-bold">³</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Brand + Keyword Strength</h3>
+            <p class="text-slate-400 leading-relaxed">
+              Short, confident, memorable, and keyword-rich on a <span class="text-white font-medium">premium .com</span>. A rare combination in today's market that delivers both SEO power and brand authority.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 p-8 bg-[#050914] border border-sky-400/20 rounded-2xl text-center max-w-3xl mx-auto">
+        <p class="text-lg text-slate-200 leading-relaxed font-light">
+          This is <span class="text-sky-300 font-semibold">foundational infrastructure</span> for the next phase of AI adoption. The buyer who acquires it gains immediate brand authority and a defensible position in one of the fastest-growing technology sectors.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Acquisition anchor for scroll-to-CTA -->
+  <div id="acquire" class="h-0"></div>
+
+</BaseLayout>
