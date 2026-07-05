@@ -23,14 +23,6 @@ const jsonLd = [
     url: SITE.url,
     description,
     inLanguage: 'en-US',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE.url}/search?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   },
   {
     '@context': 'https://schema.org',

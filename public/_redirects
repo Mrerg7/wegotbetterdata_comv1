@@ -1,3 +1,5 @@
-# Host-based redirects (www→apex, HTTP→HTTPS) are configured as Cloudflare Redirect Rules at the zone level.
-# _redirects under Workers Static Assets only supports relative paths (error 100324).
-# See: Cloudflare Dashboard → wegotbetterdata.com → Rules → Redirect Rules
+# Host-based redirects (www→apex, HTTP→HTTPS) are handled by functions/_middleware.js.
+# Absolute URLs in this file cause Workers error 100324 — use relative paths only.
+
+/search    /    301
+/search/*  /    301
