@@ -1,9 +1,12 @@
-name = "wegotbetterdata-com"
+name = "wegotbetterdata-comv1"
+main = "./src/worker.js"
 compatibility_date = "2026-06-01"
-pages_build_output_dir = "dist"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "404-page"
 
 [vars]
 SITE_URL = "https://wegotbetterdata.com"

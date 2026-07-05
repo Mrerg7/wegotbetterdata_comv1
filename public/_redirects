@@ -1,4 +1,4 @@
-# Host-based redirects (www→apex, HTTP→HTTPS) are handled by functions/_middleware.js.
+# Host-based redirects (www→apex, HTTP→HTTPS) are handled by src/worker.js.
 # Absolute URLs in this file cause Workers error 100324 — use relative paths only.
 
 /search    /    301
