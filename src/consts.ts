@@ -6,6 +6,8 @@ export const SITE = {
   url: 'https://wegotbetterdata.com',
   locale: 'en_US',
   acquisitionEmail: 'sales@desertrich.com',
+  /** USD asking price for Product structured data (update when listing price changes). */
+  acquisitionOfferPrice: 100000,
   updated: '2026-06-22',
 } as const;
 
