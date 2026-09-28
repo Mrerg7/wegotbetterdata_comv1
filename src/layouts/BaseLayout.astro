@@ -2,24 +2,68 @@
 import SEO from '../components/SEO.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ExitIntent from '../components/ExitIntent.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  type?: 'website' | 'article';
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+  };
+  showStickyBuy?: boolean;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  type = 'website',
+  article,
+  showStickyBuy = true,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
-    <SEO title={title} description={description} path={Astro.url.pathname} />
+    <SEO
+      title={title}
+      description={description}
+      path={Astro.url.pathname}
+      type={type}
+      article={article}
+    />
   </head>
-  <body class="overflow-x-hidden">
+  <body class="overflow-x-hidden min-h-screen bg-[var(--bg)] text-[var(--fg)] antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
     <Nav />
-    <slot />
+    <main id="main">
+      <slot />
+    </main>
     <Footer />
+    {showStickyBuy && <StickyBuyBar />}
+    <ExitIntent />
+    <script>
+      // Lightweight view counter for urgency (session-stable random base + live ticks)
+      const viewEl = document.querySelector('[data-view-count]');
+      if (viewEl) {
+        const key = 'wgb-viewers';
+        let base = Number(sessionStorage.getItem(key));
+        if (!base) {
+          base = 7 + Math.floor(Math.random() * 11);
+          sessionStorage.setItem(key, String(base));
+        }
+        const render = () => {
+          const jitter = Math.floor(Math.random() * 3);
+          viewEl.textContent = String(base + jitter);
+        };
+        render();
+        setInterval(render, 18000);
+      }
+    </script>
   </body>
 </html>

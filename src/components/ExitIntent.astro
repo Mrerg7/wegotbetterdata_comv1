@@ -1,0 +1,121 @@
+---
+---
+
+<div
+  id="exit-intent"
+  class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="exit-intent-title"
+  aria-hidden="true"
+>
+  <div class="relative w-full max-w-md rounded-3xl border border-sky-400/30 bg-[var(--bg-elevated)] p-8 shadow-2xl animate-fade-up">
+    <button
+      id="exit-intent-close"
+      type="button"
+      class="absolute right-4 top-4 tap-target inline-flex items-center justify-center rounded-xl text-[var(--muted)] hover:text-[var(--fg)]"
+      aria-label="Close offer"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <p class="text-xs font-semibold uppercase tracking-[3px] text-sky-400 mb-3">Limited acquisition window</p>
+    <h2 id="exit-intent-title" class="font-display text-2xl font-bold tracking-tight mb-3">
+      Get preferential terms before you go
+    </h2>
+    <p class="text-[var(--muted)] text-base mb-6">
+      Leave your email for escrow-ready pricing notes and a discreet follow-up from the listing agent.
+    </p>
+
+    <form id="exit-intent-form" class="space-y-3" novalidate>
+      <label class="block">
+        <span class="sr-only">Email address</span>
+        <input
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="you@company.com"
+          class="w-full min-h-12 rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 text-base text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-sky-400/60"
+        />
+      </label>
+      <button type="submit" class="btn-accent w-full !px-6 !py-3 !text-base min-h-12">
+        Send me acquisition details
+      </button>
+      <p id="exit-intent-status" class="text-sm text-[var(--muted)] min-h-5" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('exit-intent');
+  const closeBtn = document.getElementById('exit-intent-close');
+  const form = document.getElementById('exit-intent-form') as HTMLFormElement | null;
+  const status = document.getElementById('exit-intent-status');
+  const seenKey = 'wgb-exit-seen';
+
+  const open = () => {
+    if (!overlay || localStorage.getItem(seenKey)) return;
+    overlay.classList.remove('hidden');
+    overlay.classList.add('flex');
+    overlay.setAttribute('aria-hidden', 'false');
+    localStorage.setItem(seenKey, '1');
+  };
+
+  const close = () => {
+    overlay?.classList.add('hidden');
+    overlay?.classList.remove('flex');
+    overlay?.setAttribute('aria-hidden', 'true');
+  };
+
+  closeBtn?.addEventListener('click', close);
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+
+  let armed = false;
+  window.setTimeout(() => {
+    armed = true;
+  }, 12000);
+
+  document.addEventListener('mouseout', (e) => {
+    if (!armed) return;
+    if (e.clientY <= 0) open();
+  });
+
+  // Mobile: soft delay-based prompt once per session after scroll depth
+  let mobileShown = false;
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (mobileShown || window.innerWidth >= 768) return;
+      if (window.scrollY > window.innerHeight * 1.4) {
+        mobileShown = true;
+        window.setTimeout(open, 800);
+      }
+    },
+    { passive: true },
+  );
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const email = String(data.get('email') || '').trim();
+    if (!email || !email.includes('@')) {
+      if (status) status.textContent = 'Enter a valid work email.';
+      return;
+    }
+    const subject = encodeURIComponent('WeGotBetterData.com — Preferential terms request');
+    const body = encodeURIComponent(
+      `Hello,\n\nPlease send preferential acquisition terms for WeGotBetterData.com.\n\nEmail: ${email}\n\n— `,
+    );
+    window.location.href = `mailto:sales@desertrich.com?subject=${subject}&body=${body}`;
+    if (status) status.textContent = 'Opening your email client…';
+    window.setTimeout(close, 1200);
+  });
+</script>

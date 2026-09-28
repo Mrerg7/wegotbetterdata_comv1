@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, OFFER_MAILTO } from '../consts';
+---
+
+<BaseLayout
+  title={`Make an Offer | ${SITE.name} | Premium Domain for Sale`}
+  description={`Submit a confidential offer for ${SITE.name}. Asking ${SITE.priceDisplay}. Escrow-ready transfer with direct agent response.`}
+>
+  <section class="pt-28 pb-20 section-bg min-h-[80vh]">
+    <div class="mx-auto max-w-xl px-6">
+      <p class="uppercase tracking-[3px] text-xs text-sky-400 mb-3 font-semibold">Make Offer</p>
+      <h1 class="font-display text-4xl font-bold tracking-tight mb-3">{SITE.name}</h1>
+      <p class="text-[var(--muted)] text-lg mb-8">
+        Asking <span class="text-sky-400 font-semibold">{SITE.priceDisplay}</span>.
+        Serious offers receive a direct response with escrow options.
+      </p>
+
+      <form id="offer-form" class="card-surface p-6 sm:p-8 space-y-4" novalidate>
+        <div>
+          <label for="name" class="block text-sm font-semibold mb-2">Full name</label>
+          <input id="name" name="name" required autocomplete="name" class="w-full min-h-12 rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 text-base" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-semibold mb-2">Work email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" class="w-full min-h-12 rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 text-base" />
+        </div>
+        <div>
+          <label for="company" class="block text-sm font-semibold mb-2">Company / fund</label>
+          <input id="company" name="company" autocomplete="organization" class="w-full min-h-12 rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 text-base" />
+        </div>
+        <div>
+          <label for="amount" class="block text-sm font-semibold mb-2">Offer amount (USD)</label>
+          <input id="amount" name="amount" type="number" min="1000" step="1000" required placeholder="85000" class="w-full min-h-12 rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 text-base" />
+        </div>
+        <div>
+          <label for="notes" class="block text-sm font-semibold mb-2">Notes / timeline</label>
+          <textarea id="notes" name="notes" rows="4" class="w-full rounded-2xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-base"></textarea>
+        </div>
+        <button type="submit" class="btn-accent w-full" data-track="offer-submit">Submit offer</button>
+        <p id="offer-status" class="text-sm text-[var(--muted)] min-h-5" aria-live="polite"></p>
+        <p class="text-xs text-[var(--muted)]">
+          Prefer email? <a class="text-sky-400 underline" href={OFFER_MAILTO}>Open a pre-filled offer message</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('offer-form') as HTMLFormElement | null;
+    const status = document.getElementById('offer-status');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const email = String(data.get('email') || '').trim();
+      const company = String(data.get('company') || '').trim();
+      const amount = String(data.get('amount') || '').trim();
+      const notes = String(data.get('notes') || '').trim();
+
+      if (!name || !email.includes('@') || !amount) {
+        if (status) status.textContent = 'Please complete name, email, and offer amount.';
+        return;
+      }
+
+      const subject = encodeURIComponent('WeGotBetterData.com — Offer Submission');
+      const body = encodeURIComponent(
+        `Hello,\n\nI would like to submit an offer for WeGotBetterData.com.\n\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nOffer amount (USD): ${amount}\nNotes: ${notes}\n\n— `,
+      );
+      // @ts-expect-error optional analytics
+      window.dataLayer = window.dataLayer || [];
+      // @ts-expect-error optional analytics
+      window.dataLayer.push({ event: 'offer_submit', amount });
+      if (status) status.textContent = 'Opening your email client to send the offer…';
+      window.location.href = `mailto:sales@desertrich.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</BaseLayout>

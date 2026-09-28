@@ -1,72 +1,102 @@
 ---
-import { SITE, ACQUISITION_MAILTO, DISCLAIMER } from '../consts';
+import { SITE, ACQUISITION_MAILTO, DISCLAIMER, NAV_LINKS } from '../consts';
 import AcquisitionCTA from './AcquisitionCTA.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer id="acquire" class="border-t border-white/10 bg-[#030712]">
+<footer class="border-t border-[var(--border)] bg-[var(--bg-footer)]">
   <div class="mx-auto max-w-screen-xl px-6 py-20">
-    <!-- CTA Card -->
     <div
-      class="relative overflow-hidden rounded-[2rem] border border-sky-500/20 bg-gradient-to-br from-[#050914] via-sky-950/20 to-[#030712] p-10 md:p-14"
+      id="acquire"
+      class="relative overflow-hidden rounded-[2rem] border border-sky-500/20 bg-gradient-to-br from-[var(--bg)] via-sky-950/20 to-[var(--bg-footer)] p-8 md:p-14"
     >
       <div
         class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl"
         aria-hidden="true"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-cyan-500/8 blur-3xl"
-        aria-hidden="true"
-      >
-      </div>
+      ></div>
 
       <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
         <div>
           <p class="mb-3 text-xs font-black uppercase tracking-[3px] text-sky-400">
             Domain available for acquisition
           </p>
-          <h2 class="font-display text-4xl tracking-tight md:text-5xl">
-            WeGotBetterData.com is available for acquisition
+          <h2 class="font-display text-3xl sm:text-4xl tracking-tight md:text-5xl text-[var(--fg)]">
+            {SITE.name} is available for acquisition
           </h2>
-          <p class="mt-5 max-w-xl text-lg text-slate-400">
-            Serious buyers and strategic acquirers: connect directly for confidential terms,
-            transfer logistics, and flexible closing options. One premium asset. One point of contact.
+          <p class="mt-5 max-w-xl text-lg text-[var(--muted)]">
+            Asking <span class="text-sky-400 font-semibold">{SITE.priceDisplay}</span>.
+            Serious buyers: connect for confidential terms, escrow instructions, and flexible closing options.
           </p>
-          <p class="mt-6 font-mono text-sm text-sky-300">
-            <a href={`mailto:${SITE.acquisitionEmail}`} class="hover:text-white transition-colors">
+          <p class="mt-6 font-mono text-sm text-sky-400">
+            <a href={`mailto:${SITE.acquisitionEmail}`} class="hover:text-[var(--fg)] transition-colors min-h-12 inline-flex items-center">
               {SITE.acquisitionEmail}
             </a>
           </p>
         </div>
 
-        <div class="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
-          <AcquisitionCTA label="Request acquisition terms" variant="accent" class="w-full" />
+        <div class="flex flex-col gap-3">
+          <AcquisitionCTA label="Buy Now — Request escrow" variant="accent" class="w-full !text-base min-h-12" track="footer-buy" />
+          <a
+            href="/offer/"
+            class="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/15 px-8 py-4 text-sm font-semibold text-[var(--muted)] transition hover:border-sky-400/50 hover:text-sky-400"
+            data-track="footer-offer"
+          >
+            Make an Offer
+          </a>
           <a
             href={ACQUISITION_MAILTO}
-            class="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/15 px-8 py-4 text-sm font-semibold text-slate-300 transition hover:border-white/40 hover:text-white"
+            class="inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/15 px-8 py-4 text-sm font-semibold text-[var(--muted)] transition hover:border-white/40 hover:text-[var(--fg)]"
+            data-track="footer-agent"
           >
-            <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
-            Escrow-ready · Direct response
+            Contact Agent · Escrow-ready
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Disclaimer -->
-    <p class="mx-auto mt-12 max-w-4xl text-center text-xs leading-relaxed text-slate-500">
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      <div>
+        <p class="font-display text-lg font-semibold mb-3">{SITE.brand}</p>
+        <p class="text-sm text-[var(--muted)] leading-relaxed">
+          Premium domain marketplace listing for category-defining AI data assets.
+        </p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-[2px] text-[var(--muted)] mb-3">Explore</p>
+        <ul class="space-y-2">
+          {NAV_LINKS.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-[var(--fg)]/80 hover:text-sky-400 transition-colors inline-flex min-h-10 items-center">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-[2px] text-[var(--muted)] mb-3">Resources</p>
+        <ul class="space-y-2">
+          <li><a href="/insights/" class="text-sm hover:text-sky-400 inline-flex min-h-10 items-center">Domain insights blog</a></li>
+          <li><a href="/offer/" class="text-sm hover:text-sky-400 inline-flex min-h-10 items-center">Submit an offer</a></li>
+          <li><a href="/robots.txt" class="text-sm hover:text-sky-400 inline-flex min-h-10 items-center">robots.txt</a></li>
+          <li><a href="/sitemap-index.xml" class="text-sm hover:text-sky-400 inline-flex min-h-10 items-center">XML sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mx-auto mt-12 max-w-4xl text-center text-xs leading-relaxed text-[var(--muted)]">
       {DISCLAIMER}
     </p>
 
-    <!-- Bottom bar -->
     <div
-      class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-slate-500 md:flex-row"
+      class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 text-xs text-[var(--muted)] md:flex-row"
     >
       <div>© {year} {SITE.name} — Premium strategic asset</div>
-      <div class="text-[10px] uppercase tracking-wider text-slate-600">
+      <div class="text-[10px] uppercase tracking-wider opacity-70">
         Demonstration & informational · Updated {SITE.updated}
       </div>
     </div>

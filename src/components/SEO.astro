@@ -1,48 +1,78 @@
 ---
-import { SITE, HERO_IMAGE_CDN } from '../consts';
+import {
+  SITE,
+  HERO_IMAGE_CDN,
+} from '../consts';
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
+  type?: 'website' | 'article';
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+  };
 }
 
 const {
   title = SITE.title,
   description = SITE.description,
   path = '/',
+  type = 'website',
+  article,
 } = Astro.props;
 
 const canonical = new URL(path, SITE.url).href;
+const keywords = SITE.keywords.join(', ');
 
-const jsonLd = [
+const jsonLd: Record<string, unknown>[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name,
     url: SITE.url,
-    description,
+    description: SITE.description,
     inLanguage: 'en-US',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    logo: HERO_IMAGE_CDN,
+    email: SITE.acquisitionEmail,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: SITE.acquisitionEmail,
+      availableLanguage: 'English',
+    },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'WeGotBetterData.com — Premium Domain Name',
-    description: 'Premium digital asset positioned as the definitive independent index for AI data quality excellence. Category-defining .com domain available for strategic acquisition.',
+    description:
+      'Premium digital asset positioned as the definitive independent index for AI data quality excellence. Category-defining .com domain available for strategic acquisition.',
     url: SITE.url,
     category: 'Domain Name',
+    sku: 'WEGOTBETTERDATA-COM',
     brand: {
       '@type': 'Brand',
-      name: 'WeGotBetterData',
+      name: SITE.brand,
       slogan: 'We Got Better Data.',
     },
+    image: [HERO_IMAGE_CDN],
     offers: {
       '@type': 'Offer',
-      url: SITE.url,
+      url: `${SITE.url}/#acquire`,
       price: SITE.acquisitionOfferPrice,
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       priceValidUntil: '2027-12-31',
+      itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'Organization',
         name: 'Desert Rich',
@@ -51,7 +81,6 @@ const jsonLd = [
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
         returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-        returnMethod: 'https://schema.org/ReturnByMail',
         applicableCountry: 'US',
       },
       shippingDetails: {
@@ -67,13 +96,13 @@ const jsonLd = [
             '@type': 'QuantitativeValue',
             minValue: 1,
             maxValue: 3,
-            unitCode: 'd',
+            unitCode: 'DAY',
           },
           transitTime: {
             '@type': 'QuantitativeValue',
             minValue: 0,
             maxValue: 0,
-            unitCode: 'd',
+            unitCode: 'DAY',
           },
         },
         shippingDestination: {
@@ -82,37 +111,46 @@ const jsonLd = [
         },
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      bestRating: '5',
-      ratingCount: 1,
-    },
-    review: {
-      '@type': 'Review',
-      author: {
-        '@type': 'Organization',
-        name: 'WeGotBetterData.com',
-      },
-      reviewBody:
-        'Premium domain for AI data quality indexing — a category-defining digital asset for the era of data-driven AI adoption.',
-    },
-    image: HERO_IMAGE_CDN,
   },
   {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'WeGotBetterData.com',
-    url: SITE.url,
-    logo: HERO_IMAGE_CDN,
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'sales',
-      email: SITE.acquisitionEmail,
-      availableLanguage: 'English',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: canonical,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
     },
+    primaryImageOfPage: HERO_IMAGE_CDN,
   },
 ];
+
+if (article) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    url: canonical,
+    image: HERO_IMAGE_CDN,
+    datePublished: article.publishedTime,
+    dateModified: article.modifiedTime ?? article.publishedTime,
+    author: {
+      '@type': 'Organization',
+      name: article.author ?? SITE.name,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: HERO_IMAGE_CDN,
+      },
+    },
+  });
+}
 ---
 
 <meta charset="UTF-8" />
@@ -120,12 +158,15 @@ const jsonLd = [
 <link rel="canonical" href={canonical} />
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content="index, follow" />
-<meta name="author" content="WeGotBetterData.com" />
-<meta name="theme-color" content="#050914" />
+<meta name="keywords" content={keywords} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="author" content={SITE.name} />
+<meta name="theme-color" content="#050914" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f4f8fc" media="(prefers-color-scheme: light)" />
 <meta name="google-site-verification" content="c_NA5R-59RaQMkU34B_x7R-af0gZYuSViu-SwNWlU9M" />
+<meta name="format-detection" content="telephone=no" />
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE.name} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -133,19 +174,37 @@ const jsonLd = [
 <meta property="og:locale" content={SITE.locale} />
 <meta property="og:image" content={HERO_IMAGE_CDN} />
 <meta property="og:image:secure_url" content={HERO_IMAGE_CDN} />
-<meta property="og:image:alt" content="WeGotBetterData.com — The Definitive Index for AI Data Excellence" />
+<meta property="og:image:alt" content="WeGotBetterData.com — Premium Domain for Sale" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+{article?.publishedTime && <meta property="article:published_time" content={article.publishedTime} />}
+{article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={HERO_IMAGE_CDN} />
-<meta name="twitter:image:alt" content="WeGotBetterData.com — The Definitive Index for AI Data Excellence" />
+<meta name="twitter:image:alt" content="WeGotBetterData.com — Premium Domain for Sale" />
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="preconnect" href="https://imagedelivery.net" />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<script is:inline>
+  (() => {
+    try {
+      const stored = localStorage.getItem('wgb-theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const theme = stored || (prefersLight ? 'light' : 'dark');
+      document.documentElement.dataset.theme = theme;
+    } catch {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+</script>

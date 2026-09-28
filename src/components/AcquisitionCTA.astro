@@ -5,12 +5,16 @@ interface Props {
   label?: string;
   variant?: 'primary' | 'accent' | 'outline';
   class?: string;
+  href?: string;
+  track?: string;
 }
 
 const {
   label = 'Request acquisition terms',
   variant = 'accent',
   class: extraClass = '',
+  href = ACQUISITION_MAILTO,
+  track = 'cta-inquire',
 } = Astro.props;
 
 const variantClasses: Record<string, string> = {
@@ -21,8 +25,9 @@ const variantClasses: Record<string, string> = {
 ---
 
 <a
-  href={ACQUISITION_MAILTO}
+  href={href}
   class={`${variantClasses[variant]} ${extraClass}`}
+  data-track={track}
 >
   {label}
 </a>

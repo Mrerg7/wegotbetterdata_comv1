@@ -4,11 +4,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        sans: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', '"Source Sans 3"', 'sans-serif'],
       },
       maxWidth: {
         'screen-xl': '1280px',
+      },
+      colors: {
+        ink: {
+          DEFAULT: '#050914',
+          soft: '#070c1a',
+        },
       },
     },
   },
